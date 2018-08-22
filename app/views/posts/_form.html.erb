@@ -1,0 +1,34 @@
+<%= form_for(post) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :ongoing, value: true %>
+  <div class="field">
+    후원제목
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    후원내용
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    후원 이미지
+    <%= f.file_field :image, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+  <div class="field">
+    코인 수량
+    <%= f.text_field :coin_left %>
+  </div>
+  <div class="field">
+    코인 시작 가격
+    <%= f.text_field :coin_rate %>
+  </div>
+  <div class="field">
+    후원 마감 시간
+    <%= f.date_field :bid_closing_at %>
+  </div>
+
+  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

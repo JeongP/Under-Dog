@@ -1,0 +1,56 @@
+<%= form_for(player) do |f| %>
+ 
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :height %>
+    <%= f.text_field :height %>
+  </div>
+
+  <div class="field">
+    <%= f.label :weight %>
+    <%= f.text_field :weight %>
+  </div>
+
+  <div class="field">
+    <%= f.label :team %>
+    <%= f.text_field :team %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image1 %>
+    <%= f.file_field :image1, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image2 %>
+    <%= f.file_field :image2, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image3 %>
+    <%= f.file_field :image3, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image4 %>
+    <%= f.file_field :image4, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :video %>
+    <%= f.text_field :video %>
+    
+  </div>
+  
+  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

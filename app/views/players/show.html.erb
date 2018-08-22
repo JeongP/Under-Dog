@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @player.name %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @player.height %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @player.weight %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @player.team %>
+</p>
+
+<p>
+  <strong>Image1:</strong>
+  <%= image_tag("#{@player.image1}") %>
+  
+</p>
+
+<p>
+  <strong>Image2:</strong>
+  <%= image_tag("#{@player.image2}") %>
+</p>
+
+<p>
+  <strong>Image3:</strong>
+  <%= image_tag("#{@player.image3}") %>
+</p>
+
+<p>
+  <strong>Image4:</strong>
+  <%= image_tag("#{@player.image4}") %>
+</p>
+
+<p>
+  <strong>Video:</strong>
+  <iframe width="560" height="315" src="<%= @player.video%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</p>
+
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %>
+
+<div class='row'>
+  <% @posts.each do |post| %>
+    <div class="col-sm-12 col-md-6 col-xl-3">
+      <a href = "/posts/<%= post.id %>">  
+        <div class="card h-card">
+          <div class="h-img-wrapper">
+            <% if !post.image.blank? %>
+              <img class="card-img-top h-img" src="<%= post.image %>" alt="Card image cap">
+            <% else %>
+              <%= image_tag("placeholder_fest.jpeg", class: "card-img-top h-img") %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h5 class="h-card-title" style="color:#09083a;"><%= post.title %></h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% end %>
+</div>
+
+

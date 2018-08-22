@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  height: MyString
+  weight: MyString
+  team: MyString
+  image1: MyString
+  image2: MyString
+  image3: MyString
+  image4: MyString
+  video: MyString
+
+two:
+  name: MyString
+  height: MyString
+  weight: MyString
+  team: MyString
+  image1: MyString
+  image2: MyString
+  image3: MyString
+  image4: MyString
+  video: MyString

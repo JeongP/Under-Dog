@@ -1,0 +1,106 @@
+<!-- 소개페이지 (비회원 첫화면)  -->
+  <div class="container-video">
+    <video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+          <source src="../main_vid.mp4" type="video/mp4">
+          <source src="../main_vid.webm" type="video/webm">
+        </video>
+        </div>
+  <header class="header">
+    <div class="logo">
+      <h1><a href="/">UNDERDOG</a></h1>
+    </div>
+    <% if user_signed_in?%>
+      <nav class="home_navigation">
+        <ul>
+          <li><a href="/players">선수 보기</a></li>
+          <li><a href="/posts">후원 하기</a></li>
+          <li><a href="/">자유시장</a></li>
+          <li><a href="/home/mypage">마이페이지</a></li>
+          <li><a href="/">개발자소개</a></li>
+          <li><a href="/users/sign_out" data-method="delete">로그아웃</a></li>
+        </ul>
+      </nav>
+    <% else %>
+      <nav class="start_navigation">
+          <button type="button" class="btn-lg btn-outline-warning">시작하기</button>
+      </nav>
+    <% end %>
+  </header>
+  
+<div class="start_container">
+  
+    <section id="start_section_01" class="start_area">
+      <div class="start_wrapper">
+        <p class="start_text">내 손으로 직접 유망주를 데뷔시킨다!</p>
+        <%= link_to '시작하기', posts_path, class:"start_btn" %>
+      </div>  
+      
+    </section>
+  <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"></i></div>
+    <section id="start_section_02" class="intro_company">
+      회사 소개
+    </section>
+    <section id="start_section_03" class="overview_company">
+      선수들 썸네일
+    </section>
+</div>
+
+회원가입 폼
+<div class="sign_up_form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+  
+    <div class="field">
+      <%= f.label :email, "이메일" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :password, "비밀번호" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :password_confirmation, "비밀번호 확인" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+  
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
+  
+</div>
+
+로그인 폼
+<div class="sign_in_form">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email, "이메일" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+  
+    <div class="field">
+      <%= f.label :password, "비밀번호" %>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+  
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, "자동 로그인" %>
+      </div>
+    <% end -%>
+  
+    <div class="actions">
+      <%= f.submit "Log in" %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "users/shared/links" %>
+
+<%#= link_to 'post index', posts_path %>

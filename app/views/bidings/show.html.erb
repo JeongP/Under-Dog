@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @biding.price %>
+</p>
+
+<p>
+  <strong>Success bid:</strong>
+  <%= @biding.success_bid %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @biding.post_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @biding.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_biding_path(@biding) %> |
+<%= link_to 'Back', bidings_path %>

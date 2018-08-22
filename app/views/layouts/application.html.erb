@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!--<header class="header">-->
+  <!--  <div class="logo">-->
+  <!--    <h1><a href="/">UNDERDOG</a></h1>-->
+  <!--  </div>-->
+  <!--  <% if user_signed_in?%>-->
+  <!--    <nav class="home_navigation">-->
+  <!--      <ul>-->
+  <!--        <li><a href="/players">선수 보기</a></li>-->
+  <!--        <li><a href="/posts">후원 하기</a></li>-->
+  <!--        <li><a href="/">자유시장</a></li>-->
+  <!--        <li><a href="/home/mypage">마이페이지</a></li>-->
+  <!--        <li><a href="/">개발자소개</a></li>-->
+  <!--        <li><a href="/users/sign_out" data-method="delete">로그아웃</a></li>-->
+  <!--      </ul>-->
+  <!--    </nav>-->
+  <!--  <% else %>-->
+  <!--    <nav class="start_navigation">-->
+  <!--      <ul>-->
+  <!--        <li><a href="/">시작하기</a></li>-->
+  <!--      </ul>-->
+  <!--    </nav>-->
+      
+  <!--  <% end %>-->
+  <!--</header>-->
+  <!--<main>-->
+    <%= yield %>
+  <!--</main>-->
+</body>
+</html>
+<script>
+$(window).scroll(function(){
+    $(".arrow").css("opacity", 1 - $(window).scrollTop() / 250); 
+  //250 is fade pixels
+  });</script>

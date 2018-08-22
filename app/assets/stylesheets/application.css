@@ -1,0 +1,169 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import url('./reset.scss');
+
+html {
+    font-size: 10px;
+    box-sizing: border-box;
+}
+body {
+    font-size: 1.6rem;
+}
+
+/*header*/
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+    left: 0;
+    font-size: 1.6rem;
+    z-index: 1000;
+}
+.logo {
+    float: left;
+}
+.logo h1 a{
+    color: #fff;
+    display: inline-block;
+    padding: 2rem;
+    font-size: 2rem;
+}
+.logo h1 a:hover{
+    background: none;
+    text-decoration: none;
+}
+.start_navigation, .home_navigation {
+    float: right;
+    padding: 2rem;
+}
+
+.header::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+.home_navigation li {
+    display: inline-block;
+    padding: 0 1rem;
+}
+.home_navigation li a {
+    color: #fff;
+}
+
+
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+i {
+  display: block;
+  color: #fff;
+}
+.arrow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -20px;
+  width: 40px;
+  height: 60px; /*change with size of arrow to make sit on bottom */
+/*   background-image: url(); */
+/*   background-size: contain; */
+}
+
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+/*main*/
+
+
+
+
+/*임시용*/
+.h-card {
+    margin-top: 2rem;
+    box-shadow: 0px 3px 15px 0 rgba(0, 0, 0, 0.3);
+}
+.h-img-wrapper{
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%;
+    border-radius: 3px;
+}
+.card-img-top{
+    height:20rem;
+}
+.h-img{
+    position: absolute;
+    width: auto;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.h-card-title{
+    font-size: 1.5rem;
+    color: #333;
+}

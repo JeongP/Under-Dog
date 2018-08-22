@@ -1,0 +1,73 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 로그인 전 메인페이지
+.start_container section{
+  height:100vh;
+  position: relative;
+  color: #fff;
+}
+.start_container .start_area {
+  
+  background-size: cover;
+}
+.start_wrapper {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+  // background: yellow;
+}
+
+.container-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -99;
+}
+.container-video #video {
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+  overflow: hidden;
+}
+.start_text {
+  font-size: 2rem;
+  color: #fff;
+}
+.start_btn {
+  display: inline-block;
+  margin-top: 10rem;
+  padding: 2rem 6rem;
+  background: #6b4efc;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50px;
+}
+
+// 로그인, 회원가입
+.sign_in_form, .sign_up_form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 300px;
+  text-align: center;
+  background: yellow;
+}
+.sign_in_form .field label, .sign_up_form label {
+  float: left;
+}
+.sign_in_form .field input, .sign_up_form input {
+  float: right;
+}
+.sign_in_form .field::after {
+  display: block;
+  content: '';
+  clear: both;
+}

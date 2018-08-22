@@ -1,0 +1,14 @@
+   <% @block_tx = ""
+     Blockchain.instance.all_tx.each do |b|
+      
+      @block_tx << b.to_s
+    end%>
+    <%= @block_tx %> 
+
+<form action="/home/tx" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"></input>
+    <input type="hidden" name="from" value="<%= current_user.wallet_address %>"></input>
+    <input type="text" name="to"></input>
+    <input type="text" name="amount"></input><br>
+    <input type="submit" value="트랜잭션"></input>
+</form>
