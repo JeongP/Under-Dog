@@ -52,3 +52,6 @@ a {
 	text-decoration: none;
 	color: #333;
 }
+a:hover {
+	text-decoration: none !important; //부트스트랩에 가려짐 a태그 일이링 클래스 먹이기 귀찬 ㅜ
+}

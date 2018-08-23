@@ -24,17 +24,13 @@ class BidingsController < ApplicationController
   # POST /bidings
   # POST /bidings.json
   def create
-    @biding = Biding.new(biding_params)
-
-    respond_to do |format|
-      if @biding.save
-        format.html { redirect_to @biding, notice: 'Biding was successfully created.' }
-        format.json { render :show, status: :created, location: @biding }
-      else
-        format.html { render :new }
-        format.json { render json: @biding.errors, status: :unprocessable_entity }
-      end
+    n = params[:biding][:coin_count]
+    for i in '1'..n
+       @biding = Biding.new(biding_params)
+       @biding.save
     end
+    redirect_to :back
+
   end
 
   # PATCH/PUT /bidings/1
@@ -69,6 +65,6 @@ class BidingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biding_params
-      params.require(:biding).permit(:price, :success_bid, :post_id, :user_id)
+      params.require(:biding).permit(:price, :success_bid, :post_id, :user_id, :coin_count)
     end
 end

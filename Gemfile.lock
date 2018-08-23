@@ -243,6 +243,7 @@ DEPENDENCIES
   fog-aws
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mini_magick
   rails (= 5.0.0)
   rails_db

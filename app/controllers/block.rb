@@ -16,7 +16,7 @@ class Blockchain
     last_block = @chain[-1]
     normal_txs = []
     @tx.each do |t|
-      from, to, amount = t["sender"], t["recv"], t["total_amount"]
+      from, to, amount, post_id = t["sender"], t["recv"], t["total_amount"], t["post_id"]
       if @wallet[from].to_i >= amount.to_i
         @wallet[from] = @wallet[from].to_i - amount.to_i
         @wallet[to] = @wallet[to].to_i + amount.to_i
@@ -38,7 +38,7 @@ class Blockchain
 
   def make_wallet
     wallet = SecureRandom.uuid.gsub("-", "")
-    @wallet[wallet] = 5000
+    @wallet[wallet] = 50000000
     wallet #화면출력
   end
   
@@ -50,21 +50,21 @@ class Blockchain
       
   def all_tx; @tx; end;
 
-  def tx(from, to, amount)
+  def tx(from, to, amount, post_id)
     if @wallet[from].nil?
-      tx = {"sender"=>from, "recv" => to, "total_amount" => "보내는 사람 지갑이 없습니다."}
+      tx = {"sender"=>from, "recv" => to, "total_amount" => "보내는 사람 지갑이 없습니다.","post_id"=>post_id}
       @tx << tx
       @tx
     elsif @wallet[to].nil?
-       tx = {"sender"=>from, "recv" => to, "total_amount" => "받는 사람이 없습니다."}
+       tx = {"sender"=>from, "recv" => to, "total_amount" => "받는 사람이 없습니다.","post_id"=>post_id}
        @tx << tx
        @tx
     elsif @wallet[from].to_f < amount.to_f
-       tx = {"sender"=>from, "recv" => to, "total_amount" => "잔액이 부족합니다."}
+       tx = {"sender"=>from, "recv" => to, "total_amount" => "잔액이 부족합니다.","post_id"=>post_id}
        @tx << tx
        @tx
     else
-      tx = { "sender" => from, "recv" => to, "total_amount" => amount }
+      tx = { "sender" => from, "recv" => to, "total_amount" => amount, "post_id"=>post_id }
       @tx << tx
       @tx
     end

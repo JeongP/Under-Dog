@@ -1,0 +1,19 @@
+
+<p id="notice" style='padding-top:10rem'><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @market.price %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @market.user_id %>
+</p>
+<% if @market.user_id == current_user.id %>
+
+<% else %>
+  
+<% end %>
+<%= link_to 'Edit', edit_market_path(@market) %> |
+<%= link_to 'Back', markets_path %>

@@ -1,5 +1,6 @@
-<p id="notice"><%= notice %></p>
 
+<br>
+<br><br><br><br><br><br>
 <p>
   <strong>후원 제목</strong>
   <%= @post.title %>
@@ -8,15 +9,20 @@
 <p>
   <strong>후원 내용</strong>
   <%= @post.content %>
-</p>
+</p> 
 
-<p>
+
   <% if @post.ongoing == true %>
-    진행중인 후원
+    현재 진행중인 후원입니다.
+    마감 날짜: <%= @post.bid_closing_at.strftime("%Y년 %m월 %d일")  %><br>
+    남은 날짜: 
+    <% @d_day = (@post.bid_closing_at - Time.zone.now)/1.day %>
+    <%= @d_day.to_i %>일
   <% else %>
-    종료된 후원
+    종료된 후원입니다.
+    마감된 날짜: <%= @post.bid_closing_at.strftime("%Y년 %m월 %d일")  %> 
   <% end %>
-</p>
+<br>
 
 <p>
   <strong>Image:</strong>
@@ -26,7 +32,7 @@
 <p>
   <strong>Coin left:</strong>
   <%= @post.coin_left %>
-</p>
+</p> 
 
 <p>
   <strong>Coin rate:</strong>
@@ -35,8 +41,45 @@
 
 <p>
   <strong>User:</strong>
-  <%= @post.user_id %>
+  <%= User.find(@post.user_id).user_name %>의 글입니다.
 </p>
+<% sum_coin = @post.coin_left.to_i %> 
+<% num = @bidings.group(:price).order("price DESC").count %>
+<% num.each do |k,v| %>
+  <%= k %>원 수량<%= v %>개 
+  <% kum_coin = sum_coin - v
+    if kum_coin >= 0 && sum_coin > 0 %>
+      낙찰 예정 
+  <%elsif kum_coin < 0 && sum_coin > 0 %>
+      선착순 부분 낙찰 예정
+  <%else%>
+      대기
+  <%end%>    
+  <%sum_coin = kum_coin %>
+<%end%>
+
+<% if @post.user_id == current_user.id %>
+<!-- 자신의 글에는 입찰할 수 없게 -->
+<% else %>
+  <%= form_for(@biding) do |f| %>
+  
+    <div class="field">
+      시작가보다 높은 가격을 입찰해 주세요
+      <%= f.text_field :price %>
+    </div>
+    <div class="field">
+      몇개의 코인을 구매하시겠습니까?
+      <%= f.text_field :coin_count %>
+    </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+  
+    <div class="actions">
+      <%= f.submit "입찰하기" %>
+    </div>
+  <% end %>
+<% end %>
+
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

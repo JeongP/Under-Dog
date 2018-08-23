@@ -20,6 +20,7 @@ html {
     box-sizing: border-box;
 }
 body {
+    
     font-size: 1.6rem;
 }
 
@@ -29,27 +30,30 @@ body {
     width: 100%;
     position: fixed;
     top: 0;
-    background: rgba(0,0,0,0.5);
+    background: #1a1a1a;
     left: 0;
     font-size: 1.6rem;
     z-index: 1000;
+    height:10vh;
 }
 .logo {
-    float: left;
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
 }
 .logo h1 a{
     color: #fff;
-    display: inline-block;
-    padding: 2rem;
     font-size: 2rem;
-}
-.logo h1 a:hover{
-    background: none;
-    text-decoration: none;
 }
 .start_navigation, .home_navigation {
     float: right;
-    padding: 2rem;
+}
+.start_navigation ul, .home_navigation ul {
+  margin: 0;
+}
+.start_navigation button {
+  margin: 2rem;
 }
 
 .header::after {
@@ -57,12 +61,21 @@ body {
     content: '';
     clear: both;
 }
+.home_navigation{
+  height: 100%;
+}
+.home_navigation ul{
+  height: 100%;
+}
 .home_navigation li {
     display: inline-block;
-    padding: 0 1rem;
+    padding: 0 2rem;
+  
 }
 .home_navigation li a {
     color: #fff;
+    display: inline-block;
+   
 }
 
 
@@ -167,3 +180,8 @@ i {
     font-size: 1.5rem;
     color: #333;
 }
+.nav_profile_img{
+  width:110%;
+}
+
+/*  style='padding-top:10rem'  */

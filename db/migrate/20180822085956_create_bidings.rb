@@ -5,7 +5,7 @@ class CreateBidings < ActiveRecord::Migration[5.0]
       t.boolean :success_bid
       t.integer :post_id
       t.integer :user_id
-
+      t.integer :coin_count
       t.timestamps
     end
   end

@@ -5,102 +5,207 @@
           <source src="../main_vid.webm" type="video/webm">
         </video>
         </div>
-  <header class="header">
-    <div class="logo">
-      <h1><a href="/">UNDERDOG</a></h1>
-    </div>
-    <% if user_signed_in?%>
-      <nav class="home_navigation">
-        <ul>
-          <li><a href="/players">선수 보기</a></li>
-          <li><a href="/posts">후원 하기</a></li>
-          <li><a href="/">자유시장</a></li>
-          <li><a href="/home/mypage">마이페이지</a></li>
-          <li><a href="/">개발자소개</a></li>
-          <li><a href="/users/sign_out" data-method="delete">로그아웃</a></li>
-        </ul>
-      </nav>
-    <% else %>
-      <nav class="start_navigation">
-          <button type="button" class="btn-lg btn-outline-warning">시작하기</button>
-      </nav>
-    <% end %>
-  </header>
+  
   
 <div class="start_container">
-  
-    <section id="start_section_01" class="start_area">
-      <div class="start_wrapper">
-        <p class="start_text">내 손으로 직접 유망주를 데뷔시킨다!</p>
-        <%= link_to '시작하기', posts_path, class:"start_btn" %>
-      </div>  
-      
+  <section id="start_section_01" class="start_area">
+      <section id="begin_section">
+        <section class="slogan_section">
+          <p>내 손으로 직접 유망주를 데뷔시킨다!</p>
+        </section>
+        <section class="start_section">
+          <button type="button" class="btn-lg btn-outline-warning start_box">
+            시작하기
+            <!--<%= link_to '시작하기', posts_path, class:"start_btn start_box" %>-->
+          </button>
+        </section>
+        <section class="login_section">
+          <div class="login_box">
+            <div class="sign_in_form">
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="field">
+                  <%= f.label :email, "이 메 일"  , class: "idnpass"%>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+                <div class="field">
+                  <%= f.label :password, "비밀번호" , class: "idnpass"%>
+                  <%= f.password_field :password, autocomplete: "current-password" %>
+                </div>
+                <% if devise_mapping.rememberable? -%>
+                  <div class="field">
+                    <%= f.label :remember_me, "로그인 상태로 유지하기", class: "maintain" %>
+                    <%= f.check_box :remember_me, class: "maintain_ok" %>
+                  </div>
+                <% end -%>
+                <div class="actions">
+                  <%= f.submit "로그인", class:"login_button btn-lg btn-outline-warning" %>
+                </div>
+                <div class="member_submit">
+                  <div class="member if_member">아직 회원이 아니신가요?</div>
+                  <div class="member join_member">회원가입하기</div>
+                </div>
+              <% end %>
+            </div>
+              </div>
+        </section>
+        <section class="signup_section">
+          <div class="signup_box">
+            <div class="sign_up_form">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= f.hidden_field :budget, value: 1000000 %>
+                  <div class="field">
+                    <%= f.label :email, "이메일" , class: "idnpass"%>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
+                  <div class="field">
+                    <%= f.label :password, "비밀번호", class: "idnpass" %>
+                    <%= f.password_field :password, autocomplete: "new-password" %>
+                  </div>
+                  <div class="field">
+                    <%= f.label :password_confirmation, "비밀번호 확인", class: "idnpass" %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                  </div>
+                  <div class="field">
+                      <%= f.label :img, "프로필 사진", class: "idnpass" %>
+                      <%= f.file_field :img, accept: 'image/png,image/gif,image/jpeg'  %>
+                    </div>
+                  <div class="actions">
+                    <%= f.submit "회원가입하기", class:"login_button btn-lg btn-outline-warning" %>
+                  </div>
+                <% end %>
+                <div class="back_login">로그인으로 돌아가기</div>
+              </div>
+          </div>
+</section>
+      </section>
     </section>
-  <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"></i></div>
+  <div class="arrow bounce"><i class="fa fa-angle-down fa-4x" aria-hidden="true"></i></div>
     <section id="start_section_02" class="intro_company">
-      회사 소개
+      <div class="underdog_info">
+        <div class="underdog_img">
+          <img src="../ball.svg"></img>
+        </div>
+        <div class=underdog_description>
+          <p>150년이 넘는 축구사에는 많은 변화가 있어왔습니다.</p>
+          <p>그 안에서 수많은 슈퍼스타가 탄생했고 떠나갔는데요,</p>
+          <p>미래엔 또 얼마나 많은 슈퍼스타들이 생겨날까요?</p>
+          <br/>
+          <p>언더독은 블록체인의 강력한 탈중앙화 투자 서비스를 제공하며</p>
+          <p>대한민국 축구계에 새로운 가능성을 제시합니다.</p>
+        </div>
+      </div>
+      <div class="underdog_how">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">중학교 유소년팀 소속인 택구는<br/>
+              3년간 약 2000만원의 
+              훈련비가 필요합니다.<br/><br/>
+              촉망받는 유망주인 택구는
+              본인을 언더독에 등록하여 
+              후원금을 받고자합니다.
+            </li>
+            <li class="list-group-item">14세</li>
+            <li class="list-group-item">중학교 유소년(아마추어)</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">언더독을 통해 투자받은 후원금으로<br/>
+              지역 유망주가 된 택구는 
+              체육고등학교에 <br/>진학하여
+              프로의 꿈을 지속합니다.<br/><br/>
+              택구는 다시한번 언더독을 통해 
+              4000만원의 훈련비를 더 후원받고자 합니다.
+            </li>
+            <li class="list-group-item">17세</li>
+            <li class="list-group-item">고등학교 유소년(아마추어)</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">드디어 프로 데뷔에 성공한 택구는 
+              본인 월급의 <br/>20%인 
+              350만원을 자신에게
+              투자한 <br/>후원자들에게
+              5년 간 매월 나누어 배분합니다.
+            </li>
+            <li class="list-group-item">22세</li>
+            <li class="list-group-item">성남 FC(프로)</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">5년간  프로 무대에서 활약하며
+              후원자들에게 보답한 택구는 
+              이제 충분한 보답을 해냈고,<br/>
+              이젠 언더독을 떠나 스스로 
+              선수 전성기를 보내게 됩니다. 
+            </li>
+            <li class="list-group-item">27세</li>
+            <li class="list-group-item">성남 FC(프로)</li>
+          </ul>
+        </div>
+      </div>
     </section>
     <section id="start_section_03" class="overview_company">
-      선수들 썸네일
+      <div class="player_info">언더독에 등록된 유망주들</div>
     </section>
 </div>
+<%= link_to "Sign up", new_registration_path(resource_name) %><br />
 
-회원가입 폼
-<div class="sign_up_form">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+<script>
   
-    <div class="field">
-      <%= f.label :email, "이메일" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-  
-    <div class="field">
-      <%= f.label :password, "비밀번호" %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-  
-    <div class="field">
-      <%= f.label :password_confirmation, "비밀번호 확인" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-  
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-  <% end %>
-  
-</div>
+$('.start_box').click(function(){
+    $('.start_section').fadeOut("fast", function() {
+        $('.slogan_section').css('display', 'none');
+        $('.login_section').fadeIn("slow").css('display', 'flex');
+        $('.login_section').addClass('is_active',"slow");
+    });
+});
 
-로그인 폼
-<div class="sign_in_form">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email, "이메일" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-  
-    <div class="field">
-      <%= f.label :password, "비밀번호" %>
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-  
-    <% if devise_mapping.rememberable? -%>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, "자동 로그인" %>
-      </div>
-    <% end -%>
-  
-    <div class="actions">
-      <%= f.submit "Log in" %>
-    </div>
-  <% end %>
-</div>
+$('.join_member').click(function(){
+    $('.login_section').fadeOut("fast", function() {
+        $('.signup_section').fadeIn("slow").css('display', 'flex');
+        $('.signup_section').addClass('is_active',"slow");
+    });
+});
 
-<%= render "users/shared/links" %>
+$('.back_login').click(function(){
+    $('.signup_section').fadeOut("fast", function() {
+        $('.login_section').fadeIn("slow").css('display', 'flex');
+        $('.login_section').addClass('is_active',"slow");
+    });
+});
 
-<%#= link_to 'post index', posts_path %>
+$(function(){  // $(document).ready shorthand
+  $('.logo').fadeIn('slow');
+});
+
+$(document).ready(function() {
+    
+    /* Every time the window is scrolled ... */
+    $(window).scroll( function(){
+    
+        /* Check the location of each desired element */
+        $('.underdog_info').each( function(i){
+            
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            
+            /* If the object is completely visible in the window, fade it it */
+            if( bottom_of_window > bottom_of_object ){
+                
+                $(this).animate({'opacity':'1'},3000);
+                    
+            }
+            
+        }); 
+    
+    });
+    
+});
+
+</script>

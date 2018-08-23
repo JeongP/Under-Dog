@@ -11,6 +11,8 @@ class Users::SessionsController < Devise::SessionsController
    #POST /users/sign_in
    def create
      super
+        #$profile_imgs = ['/underdog1.png','/underdog2.jpg','/underdog3.jpg','/underdog4.jpg','/underdog5.jpg','/underdog6.jpg','/underdog7.jpg','/underdog8.jpg','/underdog9.jpg','/underdog10.jpg','/underdog11.jpg']
+        #$profile_img = profile_imgs.sample
    end
 
   #DELETE /users/sign_out

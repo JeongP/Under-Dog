@@ -1,1 +1,45 @@
 <h1 style='padding-top: 10rem' >마이 페이지</h1>
+충전된 금액<br>
+<%= current_user.budget %><br>
+<hr>
+<%= current_user.img %><br>
+내가 후원한 게시글 과 코인<br>
+<% coin_num = @coins.group(:post_id).order("post_id").count 
+coin_num.each do |k,v| 
+     @post = Post.find(k.to_i) %>
+     <%= @post.title %>에 <%=v%>개의 코인이 있습니다.
+     해당 코인은 (선수 이름)의 연봉 (얼마)의 가치입니다.
+     <hr>
+<%end%>
+
+<hr>
+내 포스트 후원 현황<br>
+<% @posts.each do |post| %>
+    내 포스트 제목: <%= post.title %><br> 
+    <% @bidings = Biding.where(:post_id => post.id) %>
+    <% sum_coin = post.coin_left.to_i %> 
+    <% num = @bidings.group(:price).order("price DESC").count %>
+    <% num.each do |k,v| %>
+        <%= k %>원 수량<%= v %>개 
+        <% kum_coin = sum_coin - v
+          if kum_coin >= 0 && sum_coin > 0 %>
+            낙찰 예정 
+        <%elsif kum_coin < 0 && sum_coin > 0 %>
+            선착순 부분 낙찰 예정
+        <%else%>
+            대기
+        <%end%>    
+        <%sum_coin = kum_coin %>
+        <br>
+    <% end %>
+    
+    <form action="/home/spon_end" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"></input>
+        <input type="hidden" name="post_id" value=<%=post.id%>></input>
+        <input type="hidden" name="coin_left" value=<%=post.coin_left%>></input>
+        <input type="hidden" name="coin_rate" value=<%=post.coin_rate%>></input>
+        <input type="submit" value="내 후원 종료시키기"></input>
+    </form>
+<% end %>
+
+

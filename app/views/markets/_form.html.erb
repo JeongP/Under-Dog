@@ -1,0 +1,42 @@
+<p style='padding-top:10rem'></p>
+<%= form_for(market) do |f| %>
+  <% if market.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(market.errors.count, "error") %> prohibited this market from being saved:</h2>
+
+      <ul>
+      <% market.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <!--작성자-->
+  <%= f.hidden_field :name, value: current_user.email %>
+  
+  <!--개수-->
+  <div class="field">
+    <%= f.label :count %>
+    <%= f.text_field :count %>
+  </div>
+  
+  <!--rewards-->
+  <div class="field">
+    <%= f.label :rewards %>
+    <%= f.text_field :rewards %>
+  </div>
+  
+  <!--코인가격-->
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+  
+  <!--현재사용자 id값 받기-->
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

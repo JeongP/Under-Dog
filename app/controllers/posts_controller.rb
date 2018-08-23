@@ -5,11 +5,15 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @posts = Post.order("created_at DESC").page params[:page]
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @bidings = Biding.where(:post_id => @post.id)
+    @biding = Biding.new
+    
   end
 
   # GET /posts/new
@@ -25,7 +29,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    #Blockchain.instance.tx(운영자 주소, current_user.wallet_address, @post.coin_left).to_s
+    #Blockchain.instance.tx(운영자 주소, current_user.wallet_address, @post.coin_left, @post.id).to_s
     #코인 수량을 게시글 올릴때 선수에게 운영자가 코인을 줍니당! 
     
     respond_to do |format|
@@ -71,6 +75,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :ongoing, :image,:video, :coin_left, :coin_rate, :user_id, :bid_closing_at, :end_post )
+      params.require(:post).permit(:title, :content, :ongoing, :image, :video, :coin_left, :coin_rate, :user_id, :bid_closing_at, :end_post )
     end
 end

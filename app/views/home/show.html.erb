@@ -1,6 +1,6 @@
     <%
     message = ""
-    Blockchain.instance.all_block.each do |b|
+     Blockchain.instance.all_block.each do |b|
       message << Digest::SHA256.hexdigest(b.to_s) + "<br>"
       message << b.to_s + "<hr>"
     end %>

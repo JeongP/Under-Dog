@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  resources :markets
+  resources :comments, only: [:create, :destroy]
+  resources :coins
   resources :bidings
   resources :players
   resources :posts
+  
   root 'home#index'
   
 
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }    
+  
   get 'home/mypage' => 'home#mypage'
   get 'home/main'
   get 'home/show' => 'home#show'
@@ -17,6 +22,7 @@ Rails.application.routes.draw do
   post 'home/tx' => 'home#tx'
   get 'home/view_tx' => 'home/view_tx'
   get 'home/view_all_wallet' => 'home#view_all_wallet'
+  post 'home/spon_end' => 'home#spon_end'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

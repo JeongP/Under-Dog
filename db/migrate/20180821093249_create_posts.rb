@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.string :image
       t.string :video 
       t.integer :coin_left
-      t.float :coin_rate
+      t.integer :coin_rate
       t.integer :user_id
       t.datetime :bid_closing_at
       t.boolean :end_post

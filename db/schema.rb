@@ -10,15 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822085956) do
+ActiveRecord::Schema.define(version: 20180823124620) do
 
   create_table "bidings", force: :cascade do |t|
     t.integer  "price"
     t.boolean  "success_bid"
     t.integer  "post_id"
     t.integer  "user_id"
+    t.integer  "coin_count"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "coins", force: :cascade do |t|
+    t.integer  "reward"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "player_id"
+    t.integer  "post_id"
+  end
+
+  create_table "markets", force: :cascade do |t|
+    t.string   "price"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "count"
+    t.string   "rewards"
   end
 
   create_table "players", force: :cascade do |t|
@@ -62,6 +91,8 @@ ActiveRecord::Schema.define(version: 20180822085956) do
     t.integer  "budget"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.boolean  "register"
+    t.string   "img"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

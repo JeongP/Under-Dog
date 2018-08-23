@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.all
+    @players = Player.order("created_at DESC").page params[:page]
   end
 
   # GET /players/1
@@ -25,8 +26,11 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
+    
     @player = Player.new(player_params)
-
+    @user = User.find(current_user.id) 
+    @user.register = true
+    @user.save
     respond_to do |format|
       if @player.save
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
@@ -36,6 +40,7 @@ class PlayersController < ApplicationController
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
     end
+    2
   end
 
   # PATCH/PUT /players/1
@@ -56,6 +61,9 @@ class PlayersController < ApplicationController
   # DELETE /players/1.json
   def destroy
     @player.destroy
+    @user = User.find(current_user.id) 
+    @user.register = false
+    @user.save
     respond_to do |format|
       format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
       format.json { head :no_content }

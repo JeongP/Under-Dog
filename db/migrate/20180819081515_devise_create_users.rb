@@ -15,6 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       ## Rememberable
       t.datetime :remember_created_at
       t.integer :budget
+      t.integer :coin_count #임시 DB속성
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

@@ -15,6 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
      @user = User.find(current_user.id)
      @user.wallet_address = Blockchain.instance.make_wallet.to_s
      @user.save
+             #$profile_imgs = ['/underdog1.png','/underdog2.jpg','/underdog3.jpg','/underdog4.jpg','/underdog5.jpg','/underdog6.jpg','/underdog7.jpg','/underdog8.jpg','/underdog9.jpg','/underdog10.jpg','/underdog11.jpg']
+             #$profile_img = profile_imgs.sample
    end
 
   # GET /resource/edit
@@ -45,12 +47,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :budget])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name, :budget, :img])
    end
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_account_update_params
-     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :budget])
+     devise_parameter_sanitizer.permit(:account_update, keys: [:user_name, :budget, :img])
    end
 
   # The path used after sign up.
