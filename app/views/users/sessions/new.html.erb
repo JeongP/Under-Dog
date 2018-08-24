@@ -61,9 +61,15 @@
                     <%= f.label :password, "비밀번호", class: "idnpass" %>
                     <%= f.password_field :password, autocomplete: "new-password" %>
                   </div>
+                  
                   <div class="field">
                     <%= f.label :password_confirmation, "비밀번호 확인", class: "idnpass" %>
                     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                  </div>
+                  비밀번호 6자리 이상 입력<br><br>
+                  <div class="field">
+                    <%= f.label :user_name, "회원 이름" , class: "idnpass"%>
+                    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_nam" %>
                   </div>
                   <div class="field">
                       <%= f.label :img, "프로필 사진", class: "idnpass" %>
@@ -152,9 +158,74 @@
     </section>
     <section id="start_section_03" class="overview_company">
       <div class="player_info">언더독에 등록된 유망주들</div>
+      <div class="player_description">
+        <div class="card card1">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+            
+            </li>
+            <li class="list-group-item">
+              
+            </li>
+            <li class="list-group-item">
+              <p>강우재</p>
+              <p>14살 221일</p>
+              <p>후원 가능한 코인갯수 : 400코인</p>
+              <p>1코인당 13,333원</p>
+              <br/>
+              <br/>
+            </li>
+          </ul>
+        </div>
+        <div class="card card2">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+            
+            </li>
+            <li class="list-group-item">
+            
+            </li>
+            <li class="list-group-item">
+              <p>강우재</p>
+              <p>14살 221일</p>
+              <p>후원 가능한 코인갯수 : 400코인</p>
+              <p>1코인당 13,333원</p>
+              <br/>
+              <br/>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card card3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+            
+            </li>
+            <li class="list-group-item">
+            
+            </li>
+            <li class="list-group-item">
+              <p>강우재</p>
+              <p>14살 221일</p>
+              <p>후원 가능한 코인갯수 : 400코인</p>
+              <p>1코인당 13,333원</p>
+              <br/>
+              <br/>  
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card card4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              더 많은 미래의 주인공들을 만나보세요.
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 </div>
-<%= link_to "Sign up", new_registration_path(resource_name) %><br />
+
 
 <script>
   
@@ -181,7 +252,7 @@ $('.back_login').click(function(){
 });
 
 $(function(){  // $(document).ready shorthand
-  $('.logo').fadeIn('slow');
+  $('.logo').fadeIn('fast');
 });
 
 $(document).ready(function() {
@@ -198,7 +269,7 @@ $(document).ready(function() {
             /* If the object is completely visible in the window, fade it it */
             if( bottom_of_window > bottom_of_object ){
                 
-                $(this).animate({'opacity':'1'},3000);
+                $(this).animate({'opacity':'1'},2000);
                     
             }
             

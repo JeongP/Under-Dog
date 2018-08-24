@@ -1,5 +1,111 @@
 
-<br>
+<section class="spon_section">
+  <div class="spon_player_img" style="background-image: url(<%=@post.image%>);">
+    <div class="player_name_div">
+      <p class="korea_name">이승우</p> <!--수정 -->
+      <p class="english_name">lee seung woo</p> <!--수정 -->
+    </div>    
+  </div>
+  <div class="spon_form">
+    <div class="progress custom_progress"></div>
+    <div class="progress_percent">
+      <% @bb = (Biding.where(:post_id => @post.id).count.to_f/@post.coin_left.to_f).to_f*100%>
+      <%= @bb.to_i %>%
+    </div>
+    <div class="spon_form_info">
+      <div class="spon_form_info_detail">
+        <div class="form_field">
+          <span class="f_title">남은날짜</span>
+          <% @bb = (Biding.where(:post_id => @post.id).count.to_f/@post.coin_left.to_f).to_f*100 %>
+          <% @d_day = (@post.bid_closing_at-Time.zone.now)/1.day %>
+          <% if @d_day.to_i > 0 %>
+            <span class="f_content"><%= @d_day.to_i %>일</span>
+          <% else %>
+            <span class="f_content">종료된 후원입니다.</span>
+          <% end %>
+          </div>
+        <div class="form_field">
+          <span class="f_title">옥션수량</span>
+          <span class="f_content"><%=@post.coin_left%>개</span>
+        </div>
+        <div class="form_field">
+          <span class="f_title">옥션시작 가격(1개, 부과세포함)</span>
+          <% @start = @post.coin_rate %>
+          <% if @start < 10000 %> 
+          <span class="f_content"><%=@start%>원</span>
+          <% else %>
+          <% @start_m = @start/10000
+          @start_c = @start - @start_m %>
+          <span class="f_content"><%=@start_m%>만<%@start_c%>원</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="spon_form_info_detail2"></div>
+      <div class="spon_float_end"></div>
+    </div>
+  </div>
+  <div class="spon_section_float_end">
+  </div>
+</section>
+<section class="spon_info">
+  
+</section>
+<section class="spon_media">
+  
+</section>
+<section class="spon_reward_info">
+  
+</section>
+
+<script>
+
+<%= @bb = (Biding.where(:post_id => @post.id).count.to_f/@post.coin_left.to_f).to_f*100 %>
+
+    $(".progress").progressbar({
+      	min: 0,
+        max: 100,
+      	value:  100-<%=@bb.to_i%>,
+    	  range: "min",
+      	slide: function(event, ui) {
+        	//document.getElementById("record_audio").volume = (ui.value/100);
+      	}
+    });
+
+
+</script>
+<style>
+  .ui-widget.ui-widget-content{
+    border: 0px solid #ff512f;
+    background-color :  #ff512f;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .custom_progress{
+    height :5px;
+    margin-top:3vh;
+    
+  }
+  .ui-progressbar .ui-progressbar-value{
+    margin : 0;
+    background-color: rgb(235,235,235);
+    border-color : rgb(235,235,235);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  
+  
+</style>
+
+
+
+
+
+
+
+
+
+
+
 <br><br><br><br><br><br>
 <p>
   <strong>후원 제목</strong>

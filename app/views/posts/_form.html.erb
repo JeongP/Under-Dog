@@ -1,3 +1,5 @@
+
+<br><br><br><br><br> <br> <br>
 <%= form_for(post) do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :ongoing, value: true %>
@@ -10,20 +12,57 @@
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    후원 이미지
+    후원 메인 이미지
     <%= f.file_field :image, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+      후원 이미지2
+    <%= f.file_field :image2, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+      후원 이미지3
+    <%= f.file_field :image3, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+      후원 이미지4
+    <%= f.file_field :image4, accept: 'image/png.image/gif.image/jpeg' %>
+  </div>
+      후원 이미지 5
+    <%= f.file_field :image5, accept: 'image/png.image/gif.image/jpeg' %>
   </div>
   <div class="field">
     코인 수량
-    <%= f.text_field :coin_left %>
+    <%= f.text_field :coin_left, id: "coin_left" %>
   </div>
   <div class="field">
     코인 시작 가격
-    <%= f.text_field :coin_rate %>
+    <%= f.text_field :coin_rate, id: "coin_rate"%>
   </div>
   <div class="field">
     후원 마감 시간
     <%= f.date_field :bid_closing_at %>
+  </div>
+  <div>
+      코인당 연봉 퍼센트
+    <%= f.text_field :reward_percent, id: "reward_percent"%>
+   <div>
+      수익금보호기간      
+    <%= f.text_field :money_guard, id: "money_guard" %>
+  </div> 
+ 
+  </div>
+      상환 예정
+    <%= f.text_field :reward_day, id: "reward_day"%>
+  </div>
+   
+  <div>
+      상환 재원      
+    <%= f.text_field :reward_source, id: "reward_source" %>
+  </div>
+
+  <div>
+      상환 방식
+    <%= f.text_field :reward_way, id: "reward_way" %>
+  </div>
+        자금 용도
+    <%= f.text_field :reward_use, id: "reward_use"%>
   </div>
 
   
@@ -32,3 +71,27 @@
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+
+$(document).ready(function() {
+    $("#mform").submit( function() {
+        if($("#coin_left").val() == "")
+        {
+            alert("코인 수량을 입력해주세요");
+            return false;
+        }
+        if($("#coin_rate").val() == "")
+        {
+            alert("시작가를 입력해주세요");
+            return false;
+        }
+        if($("#b_c_a").val() == "")
+        {
+            alert("마감일을 입력해주세요");
+            return false;
+        }
+    });
+    
+});
+
+</script>

@@ -1,3 +1,4 @@
+
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
@@ -244,6 +245,208 @@ input:-webkit-autofill {
       }
       }
       
+    }
+  }
+}
+
+#start_section_03{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .player_info{
+    flex: 0 1 5vh;
+    font-size: 1.6rem;
+    
+  }
+  .player_description{
+    width: 75%;
+    flex: 0 1 80vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .card{
+      height: 100%;
+      width: 100%;
+      flex: 1 1 0;
+      background: transparent;
+      margin: 1rem;
+      border: 1px solid gray;
+      justify-content: space-between;
+      align-items: center;
+      -webkit-filter: brightness(0.9) grayscale(.3); 
+      filter: brightness(0.9) grayscale(.3);
+      color: white;
+      
+      .list-group{
+        height: 100%;
+        display: flex;
+        width: 100%;
+        .list-group-item{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border: none !important;
+          text-align: center;
+          
+        &:first-child{
+          justify-content: flex-start;
+          align-items: flex-start;
+          flex: 6 1 0;
+          background: transparent;
+        }
+        &:last-child{
+          background: rgb(30,30,30);
+        }
+        flex: 1 1 0;
+        border: 1px solid gray;
+        background: linear-gradient(rgba(0,0,0,0),rgba(30,30,30,1), rgba(30,30,30,1));
+        text-align: justify;
+        padding: 2rem;
+        line-height: 1.7;
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+      }
+      
+    }
+    .card1{
+      background: url("../kang.jpg");
+    }
+    
+    .card2{
+      background: url("../park.jpg");
+    }
+    
+    .card3{
+      background: url("../lee.jpg");
+    }
+    
+    .card4{
+      .list-group{
+      .list-group-item{
+        
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        background: rgba(0,0,0,0.7) !important;
+        flex: 1 1 0;
+        padding: 2rem;
+        width: 100%;
+        height: 100%;
+      }
+      }
+    }
+  }
+}
+
+//이제부터 로그인쪽
+
+.container-fluid{
+  margin-top: 10vh;
+}
+
+.main_overview>section{
+  height: 60vh;
+}
+
+.main_overview{
+  background: linear-gradient(#111, #222);
+  .my_player_section{
+    
+    display: flex;
+    flex-direction: column;
+    .over_view_title{
+      font-family: 'Nanum Gothic', sans-serif;
+      flex: 1 1 0;
+      p{
+        color: #ff512f;
+        padding-top: 4.7rem;
+        padding-bottom: 1rem;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+    }
+    .my_card{
+      flex: 10 1 0;
+      width: 66%;
+      margin: 0 auto;
+      padding-bottom: 1vh;
+      margin-bottom: 1rem;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+        .card{
+        border: 1px solid gray;
+        margin: 1rem;
+        width: 100%;
+        height: 100%;
+        &:hover{
+          border: 1px solid #ff512f;
+        }
+        .card-body{
+          opacity: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+          &:hover{
+            opacity: 1;
+            transition: 0.2s;
+            
+            background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,1));
+            background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,1));
+            background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,1));
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,1));
+          }
+          .card-title{
+            color: #ff512f;
+            font-size: 1.6rem;
+          }
+          .card-text{
+            margin: .3rem;
+            color: white;
+            font-size: 1.4rem;
+          }
+          a{
+            margin: 1.2rem;
+          }
+        }
+      }
+      .card1{
+        background: url(../kang2.jpg) no-repeat;
+        background-size: cover;
+        
+      }
+      .card2{
+        background: url(../ryu.jpg) no-repeat;
+        background-size: cover;
+      }
+      .card3{
+        background: url(../ahn.jpg) no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+  .my_coin_section{
+    color: white;
+    font-size: 10rem;
+  }
+  .new_player_overview_section{
+    
+    display: flex;
+    flex-flow: row wrap;
+    .new_player_box{
+      .overlap{
+        flex: 0 0 50%;
+        width: 100%;
+        .new_player_img{
+          width: 100%;
+        }
+      }
     }
   }
 }

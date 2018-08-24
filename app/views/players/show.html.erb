@@ -20,44 +20,90 @@
   <section id="player_detail_info">
     <h3>선수 정보</h3>
     <div class="detail_content">
-      <div class="detail_info">선수 디테일 정보
-        <div class="player_title">
-          <%= @player.name %></br>
-            영어이름
+      <div class="row">
+        <div class="col-md-12">
+          <div class="wrapper present_support_info">
+            <p>다음 후원 시작가<span>12만 5천</span>원</p>
+            <p>20% 지분 중 1/5 사용 잔여 지분 16%</p>
+          </div>
         </div>
-        <div class="player_profile_img">
-          <%= image_tag("#{@player.image1}") %>
-        </div>
-        <p>
-          <span>국적</span>
-          <span>대한민국</span>
-        </p>
-        <p>
-          <span>소속팀</span>
-          <span><%= @player.team %></span>
-        </p>
-        <p>
-          <span>포지션</span>
-          <span>LWF</span>
-        </p>
-        <p>
-          <span>나이</span>
-          <span>19</span>
-        </p>
-        <p>
-          <span>주발</span>
-          <span>오른발</span>
-        </p>
-        <p>
-          <span>신장</span>
-          <span><%= @player.height %></span>
-        </p>
-        <p>
-          <span>체중</span>
-          <span><%= @player.weight %></span>
-        </p>
       </div>
-      <div class="player_position">포지션</div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="wrapper detail_info">
+            <h4>선수 기본 정보</h4>
+            <ul>
+              <li>
+                <p>
+                  <span>국적</span>
+                  <span>대한민국</span>
+                </p>
+              </li>
+              <li>
+                <p>
+              <span>소속팀</span>
+              <span><%= @player.team %></span>
+            </p>
+              </li>
+              <li>
+                <p>
+              <span>포지션</span>
+              <span>LWF</span>
+            </p>
+              </li>
+              <li>
+                <p>
+              <span>나이</span>
+              <span>19</span>
+            </p>
+              </li>
+              <li>
+                <p>
+              <span>주발</span>
+              <span>오른발</span>
+            </p>
+              </li>
+              <li>
+                <p>
+              <span>신장</span>
+              <span><%= @player.height %></span>
+            </p>
+              </li>
+              <li>
+                <p>
+              <span>체중</span>
+              <span><%= @player.weight %></span>
+            </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="wrapper player_position">
+            <h4>선수 포지션</h4>
+            <div class="row position_wrapper">
+              <ul class="position_list col-md-6">
+                <li>LWF</li>
+                <li>SS</li>
+                <li class="active">CF</li>
+                <li>RWF</li></br>
+                <li>LWF</li>
+                <li>DMF</li>
+                <li>CMF</li>
+                <li>AMF</li>
+                <li>RMF</li></br>
+                <li>LB</li>
+                <li>CB</li>
+                <li>RB</li></br>
+                <li>GK</li>
+              </ul>
+              <div class="position_chart col-md-6">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <section id="player_support">
@@ -88,52 +134,102 @@
   <section id="player_news">
     <h3>선수 소식</h3>
     <div class="detail_content">
-      <div class="player_video">
-        <p>하이라이트 영상</p>
-        <div class="rwd-video is-16x9">
-          <iframe width="560" height="315" src="<%= @player.video%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="wrapper player_video">
+            <h4>하이라이트 영상</h4>
+            <div class="rwd-video is-16x9">
+              <iframe width="560" height="315" src="<%= @player.video%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="cheer_comment">
+              <ul>
+                <% @player.comments.all.each do|comment|%>
+                  <li>
+                  <% user = User.find(:id => comment.email) %>
+                  <%=user.img%>
+                  <%=comment.name%>
+                  <%=comment.content%>
+                  </li>
+                  <br>
+                  <%=link_to '댓글삭제', comment_path(comment), method: :delete, date: { confirm: 'Are you sure?'} %>
+                  <br>
+                <%end%>
+              </ul>
+              <%= form_for Comment.new, url:comments_path do |f| %>
+                <p>
+                  <span>작성자</span>
+                  <%= f.text_field :name %>
+                </p>
+                <p>
+                  <span>내용</span>
+                  <%= f.text_field :content %>
+                </p>
+                
+                <%= f.hidden_field :player_id, value: @player.id %>
+                <%= f.hidden_field :email, value: current_user.id %>
+                
+                <%= f.submit '댓글 쓰기' %>
+              <%end%>
+            </div>
+          </div>
         </div>
-        <div class="cheer_comment">
-      <% @player.comments.all.each do|comment|%>
-        <br>
-        <%=comment.name%> |
-        <%=comment.content%>
-        <br>
-        <%=link_to 'Destroy', comment_path(comment), method: :delete, date: { confirm: 'Are you sure?'} %>
-        <br>
-      <%end%>
-      <%= form_for Comment.new, url:comments_path do |f| %>
-        작성자:
-        <%= f.text_field :name %>
-        내용:
-        <%= f.text_field :content %>
-        
-        <%= f.hidden_field :player_id, value: @player.id %>
-        <%= f.hidden_field :email, value: current_user.id %>
-        
-        <br>
-        <br>
-        <%= f.submit '댓글 쓰기' %>
-      <%end%>
-      
-      
-    </div>
-      </div>
-      <div class="player_article">
+        <div class="col-md-4">
+          <div class="wrapper player_article">
+        <h4>뉴스, 인터뷰</h4>
         <ul>
           <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck">
+            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
               <div class="news_img_wrapper">
                 <%= image_tag("news_img.png") %>
               </div>
-              <div>
-                <h4>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h4>
-                <p>감독대행 체제의 아르헨티나, 여전히 메시 결정 기다리는 중</p>
+              <div class="news_content">
+                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
               </div>
             </a>
           </li>
-          <li></li>
+          <li>
+            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+              <div class="news_img_wrapper">
+                <%= image_tag("news_img.png") %>
+              </div>
+              <div class="news_content">
+                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+              <div class="news_img_wrapper">
+                <%= image_tag("news_img.png") %>
+              </div>
+              <div class="news_content">
+                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+              <div class="news_img_wrapper">
+                <%= image_tag("news_img.png") %>
+              </div>
+              <div class="news_content">
+                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+              <div class="news_img_wrapper">
+                <%= image_tag("news_img.png") %>
+              </div>
+              <div class="news_content">
+                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+              </div>
+            </a>
+          </li>
         </ul>
+      </div>
+        </div>
       </div>
     </div>
   </section>
@@ -142,3 +238,28 @@
 </div>
     <%#= link_to 'Edit', edit_player_path(@player) %>
     <%#= link_to 'Back', players_path %>
+    
+<script>
+  
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myRadarChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: ['PAS', 'SHT', 'PYH', 'DEF', 'SPD', 'DRI'],
+        datasets: [{
+            backgroundColor: '#4a4a4a',
+            data: [20, 70, 40, 20, 80, 10]
+        }]
+    },
+    options: {
+        scale: {
+            // Hides the scale
+            display: true,
+            gridLines: {
+              color: '#fff',
+              lineWidth: 0.5
+            }
+        }
+    }
+});
+</script>

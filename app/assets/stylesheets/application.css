@@ -184,4 +184,10 @@ i {
   width:110%;
 }
 
+.divider{
+  margin: 2rem auto;
+  width: 60%;
+  height: 1px;
+  background: gray;
+}
 /*  style='padding-top:10rem'  */

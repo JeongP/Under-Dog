@@ -1,11 +1,11 @@
-<p id="notice" style='padding-top: 10rem'><%= notice %></p>
+
 <!--후원-->
 <h1>후원을 원하는 선수들의 글을 보여줍니다</h1>
 
 
 <div class="container">
   <div class='row'>
-    <% @posts.each do |post| %>
+    <% @posts.each_with_index do |post,i| %>
       <div class="col-sm-12 col-md-6 col-xl-3">
         <a href = "/posts/<%= post.id %>">  
           <div class="card h-card">
@@ -20,9 +20,33 @@
               <h5 class="h-card-title" style="color:#09083a;"><%= post.title %></h5>
               <% @user = User.find(post.user_id) %>
               <p><%=@user.user_name%> 선수</p>
-              <div id="progressbar"></div>
-              <span>남은날짜</span><span>모인금액</span><span>%</span>
-            </div>
+              <div class="progress<%=i%> custom-progress"></div>
+                <%#=Biding.where(:post_id => post.id).count %>
+                <%#=post.coin_left %>
+              <% if post.bid_closing_at.blank? %>
+             
+              <% else %>
+                <% @bb = (Biding.where(:post_id => post.id).count.to_f/post.coin_left.to_f).to_f*100 %>
+                <% @d_day = (post.bid_closing_at-Time.zone.now)/1.day %>
+                <% if @d_day.to_i > 0 %>
+                  <span><%= @d_day.to_i %>일 남음</span>
+                <% else %>
+                  <span>종료된 후원입니다.</span>
+                <% end %>
+              <% end %>
+              <% @sum = 0
+              @bidings = Biding.where(:post_id => post.id) 
+              @bidings =  @bidings.order("price DESC").limit(post.coin_left)
+              @bidings.each do |biding|
+                @sum += biding.price
+              end %>
+              <span>모인금액:<%=@sum%>원</span>
+              <%if @bb.to_i < 100 %>
+              <span><%=@bb.to_i%>%</span>
+              <%else%>
+              <span>100%</span>
+              <%end%>
+              </div>
           </div>
         </a>
       </div>
@@ -33,3 +57,45 @@
 
 <%= link_to 'New Post', new_post_path %>
 <%= paginate @posts %>
+
+<script>
+var prog = new Array();
+for (var i=0;i< <%=@posts.length%>;i++) {
+      prog.push($(".progress"+i));
+}
+
+
+
+<% @posts.each_with_index do |post,i| %>
+<%= @bb = (Biding.where(:post_id => post.id).count.to_f/post.coin_left.to_f).to_f*100 %>
+    prog[<%=i%>].progressbar({
+      	min: 0,
+        max: 100,
+      	value:  <%=@bb.to_i%>,
+    	  range: "min",
+      	slide: function(event, ui) {
+
+        	//document.getElementById("record_audio").volume = (ui.value/100);
+      	}
+    });
+<%end%>
+
+</script>
+
+<style>
+  .ui-widget.ui-widget-content{
+    border: 1px solid white;
+    background-color : rgb(240, 242, 231);
+  }
+  .custom-progress{
+    height :5px;
+    
+  }
+  .ui-progressbar .ui-progressbar-value{
+    margin : 0;
+    background-color: red;
+    border-color : darkgray;
+  }
+  
+  
+</style>

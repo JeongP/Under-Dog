@@ -12,11 +12,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
  def create
      super
-     @user = User.find(current_user.id)
-     @user.wallet_address = Blockchain.instance.make_wallet.to_s
-     @user.save
-             #$profile_imgs = ['/underdog1.png','/underdog2.jpg','/underdog3.jpg','/underdog4.jpg','/underdog5.jpg','/underdog6.jpg','/underdog7.jpg','/underdog8.jpg','/underdog9.jpg','/underdog10.jpg','/underdog11.jpg']
-             #$profile_img = profile_imgs.sample
+     if(current_user==nil)
+      
+     else
+      @user = User.find(current_user.id)
+      @user.wallet_address = Blockchain.instance.make_wallet.to_s
+      @user.save
+              #$profile_imgs = ['/underdog1.png','/underdog2.jpg','/underdog3.jpg','/underdog4.jpg','/underdog5.jpg','/underdog6.jpg','/underdog7.jpg','/underdog8.jpg','/underdog9.jpg','/underdog10.jpg','/underdog11.jpg']
+              #$profile_img = profile_imgs.sample
+     end
    end
 
   # GET /resource/edit
