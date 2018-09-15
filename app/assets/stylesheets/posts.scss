@@ -1,6 +1,105 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.post_main{
+    min-height: 100vh;
+    height: 100%;
+    background: linear-gradient(#111, #222) !important;
+.post_sub{
+    
+    display: flex;
+    flex-direction: column;
+    .banner_section{
+        width: 100%;
+        height: 100%;
+        flex: 0 1 232px;
+        background: url("../players.jpeg") no-repeat;
+        background-size: cover;
+        .slogan{
+            padding-top: 6rem;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+        }
+        .wrapper{
+            z-index: 300;
+            width: 100%;
+            height: 232px;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            .search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 1px solid white;
+  padding: 5px;
+  height: 36px;
+  outline: none;
+  color: black;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.searchTerm:focus{
+  color: white;
+}
+
+.searchButton {
+  position: absolute;
+  right: -50px;
+  width: 40px;
+  height: 36px;
+  
+  background: rgba(255,255,255,0.1);
+  text-align: center;
+  color: #fff;
+  
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+      width: 30%;
+      position: absolute;
+      top: 24%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+        }
+    }
+    .funding_section{
+        
+    }
+}
+.funding_section{
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    a{
+    border: 1px solid #ff512f;
+    padding: 1rem;
+    font-size: 2rem;
+    color: #ff512f;
+    }
+    width: 100%;
+    text-align: center;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
 .spon_section{
     margin-top:10vh;
     height:70vh;
@@ -24,7 +123,6 @@
             justify-content:center;      
             align-items: center;
             
-
             .korea_name{
                 color:white;
                 font-size: 2rem;
@@ -37,7 +135,7 @@
         
     }
     .spon_form{
-        padding-left: 5%;
+        padding-left: 7%;
         width:50%;
         height:100%; 
         float:left;
@@ -46,42 +144,111 @@
             color :  rgb(235,235,235);
             font-size: 1.5rem;
             font-weight : 100;
-            padding-right: 1rem;
+            padding-right: 2rem;
             height:5vh;
         }
         .spon_form_info{
             color :  rgb(225,225,225);
             
             .spon_form_info_detail{
-                width : 70%;
+                width : 60%;
                 float :left;
                 .form_field{
-                    height :5vh;
+                    height :8vh;
                     display :flex;
                     flex-direction : column;
-                    jutify-content : center;
+                    justify-content : center;
                     font-weight:100;
                     .f_title{
                         font-size : 1.2rem
                     }
                     .f_content{
                         font-size : 1.6rem;
-                        
+                    }
+                    .y_input{
+                        color: white;
+                        margin-top: 0.5rem;
+                        width:50%;
+                        background-color : #262626;
+                        border : 1px solid rgb(225,225,225);
+                    }
+                    .bid_btn{
+                        margin-top : 1vh;
+                        width: 40%;
+                        height: 4vh;
+                        color: #ff512f;
+                        border : 2px solid #ff512f;
+                        background-color : #262626;
                     }
                 }
             }
             .spon_form_info_detail2{
-                width: 30%;
+                font-size: 1.4rem;
+                width: 40%;
+                height: 50vh;
                 float :left;
+                display:flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                font-weight: 100;
+                .bid_f{
+                    border-left:1px solid #ff512f;
+                    height: 4.5vh;
+                    margin-top: 0.5rem;
+                    text-align: center;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    font-weight: 100;
+                }
             }
             .spon_float_end{
                 both:clear;
             }
+ 
         }
     }
 }
 .spon_section_float_end{
     clear:both;
+}
+.spon_reward_info{
+    width: 100%;
+    height: 70vh;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items : center;
+    .s_r{
+        width:80%;
+        font-size:1.5rem;
+        font-weight:500;
+    }
+    .spon_reward_form{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        height: 55vh;
+        width:80%;
+        border : 1px solid rgb(215,215,215);
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        .s_r_field{
+            margin-top:1rem;
+            width:80%;
+            height:6vh;
+            border-bottom : 1px solid rgb(200,200,200);
+            display: flex;
+            flex-direction: row;
+            .s_r_l{
+                width :40%;
+            }
+            .s_r_m{
+                width :60%;
+            }
+        }
+    }
 }
     
 

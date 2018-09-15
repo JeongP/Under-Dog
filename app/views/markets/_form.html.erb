@@ -15,8 +15,27 @@
   <!--작성자-->
   <%= f.hidden_field :name, value: current_user.email %>
   
+===자유시장 글쓰기===
+
+  <!--자신이 갖고있는 코인의 post-->
+  <% arr = [] %>
+  <% @posts = Coin.where(:user_id => current_user.id) %>
+  <% support_post = @posts.group(:post_id).count %>
+  <% support_post.each do |k,v| %>
+    <% arr.push(k) %>
+  <%end%>
+  <%= f.select :post_id, arr, {} %>
+  
+  <!--제목-->
+  <div class="field">
+    
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  
   <!--개수-->
   <div class="field">
+    
     <%= f.label :count %>
     <%= f.text_field :count %>
   </div>
@@ -39,4 +58,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% end %
+

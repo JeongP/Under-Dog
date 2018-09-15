@@ -1,11 +1,22 @@
 
 <section class="spon_section">
+  <% @player = Player.where(:user_id => User.find(@post.user_id).id) %>
+
+  <!-- <a href="/player/<%#=@player.id%>"> --> 
+  <!-- 선수등록해야지만 올릴수 있게 한 후 -->
   <div class="spon_player_img" style="background-image: url(<%=@post.image%>);">
     <div class="player_name_div">
-      <p class="korea_name">이승우</p> <!--수정 -->
-      <p class="english_name">lee seung woo</p> <!--수정 -->
+      <p class="korea_name"><%= User.find(@post.user_id).user_name %></p> <!--수정 -->
+      <p class="english_name">
+        <% if @post.ongoing == true %>
+        진행중인 후원
+        <% else %>
+        마감된 후원
+        <% end %>
+      </p> <!--수정 -->
     </div>    
   </div>
+  </a>
   <div class="spon_form">
     <div class="progress custom_progress"></div>
     <div class="progress_percent">
@@ -39,8 +50,58 @@
           <span class="f_content"><%=@start_m%>만<%@start_c%>원</span>
           <% end %>
         </div>
+        <%= form_for(@biding) do |f| %>
+        <div class="form_field">
+          <% if @post.user_id == current_user.id %>
+          <span>나의 게시글</span>
+          <% else %>
+          <span class="f_title">입찰수량</span>
+          <%= f.text_field :coin_count, class: "y_input" %>
+        </div>
+        <div class="form_field">
+          <span class="f_title">입찰가격(1개, 부과세 포함)</span>
+          <%= f.text_field :price, class: "y_input"%>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+        </div>
+        <div class="form_field">
+          <span class="f_title">총 입찰가격</span>
+           <% @sum = 0
+              @bidings = Biding.where(:post_id => @post.id) 
+              @bidings =  @bidings.order("price DESC").limit(@post.coin_left)
+              @bidings.each do |biding|
+                @sum += biding.price
+              end 
+              @start_mm = @sum/1000
+              @start_cc = @sum - @start_mm%>
+          <span class="f_content"><%=@start_mm%>만<%@start_cc%>원</span>
+        </div>
+        <div class="form_field">   
+              <%= f.submit "입찰하기", class: "bid_btn" %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-      <div class="spon_form_info_detail2"></div>
+      <div class="spon_form_info_detail2">
+        <p>입찰현황</p>
+        <% sum_coin = @post.coin_left.to_i %> 
+        <% num = @bidings.group(:price).order("price DESC").count %>
+        <% num.each do |k,v| %>
+          <div class="bid_f"><span>
+          <%= k %>원 수량<%= v %>개 
+          <% kum_coin = sum_coin - v
+            if kum_coin >= 0 && sum_coin > 0 %>
+              낙찰 예정 
+          <%elsif kum_coin < 0 && sum_coin > 0 %>
+              선착순 부분 낙찰 예정
+          <%else%>
+              대기
+          <%end%>    
+          <%sum_coin = kum_coin %></span>
+          <hr>
+          </div>
+        <%end%>        
+      </div>
       <div class="spon_float_end"></div>
     </div>
   </div>
@@ -54,7 +115,33 @@
   
 </section>
 <section class="spon_reward_info">
-  
+  <div class="s_r"><span>투자요약</span></div>
+  <div class="spon_reward_form">
+    <div class="s_r_field">
+      <div class="s_r_l">상환 예정</div>
+      <div class="s_r_m"><%=@post.reward_day%></div>
+    </div>
+    <div class="s_r_field">
+      <div class="s_r_l">상환 재원</div>
+      <div class="s_r_m"><%=@post.reward_source%></div>      
+    </div>
+    <div class="s_r_field">
+      <div class="s_r_l">상환 방식</div>
+      <div class="s_r_m"><%=@post.reward_way%></div>      
+    </div>
+    <div class="s_r_field">
+      <div class="s_r_l">자금 용도</div>
+      <div class="s_r_m"><%=@post.reward_use%></div>      
+    </div>
+    <div class="s_r_field">
+      <div class="s_r_l" >펀딩 시작일</div>
+      <div class="s_r_m"><%= @post.created_at.strftime("%Y. %m. %d")  %></div>      
+    </div>
+    <div class="s_r_field">
+      <div class="s_r_l">펀딩 종료일</div>
+      <div class="s_r_m"><%= @post.bid_closing_at.strftime("%Y. %m. %d")  %></div>      
+    </div>
+  </div>
 </section>
 
 <script>
@@ -96,96 +183,4 @@
   
 </style>
 
-
-
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br>
-<p>
-  <strong>후원 제목</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>후원 내용</strong>
-  <%= @post.content %>
-</p> 
-
-
-  <% if @post.ongoing == true %>
-    현재 진행중인 후원입니다.
-    마감 날짜: <%= @post.bid_closing_at.strftime("%Y년 %m월 %d일")  %><br>
-    남은 날짜: 
-    <% @d_day = (@post.bid_closing_at - Time.zone.now)/1.day %>
-    <%= @d_day.to_i %>일
-  <% else %>
-    종료된 후원입니다.
-    마감된 날짜: <%= @post.bid_closing_at.strftime("%Y년 %m월 %d일")  %> 
-  <% end %>
-<br>
-
-<p>
-  <strong>Image:</strong>
-  <%= image_tag("#{@post.image}") %>
-</p>
-
-<p>
-  <strong>Coin left:</strong>
-  <%= @post.coin_left %>
-</p> 
-
-<p>
-  <strong>Coin rate:</strong>
-  <%= @post.coin_rate %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= User.find(@post.user_id).user_name %>의 글입니다.
-</p>
-<% sum_coin = @post.coin_left.to_i %> 
-<% num = @bidings.group(:price).order("price DESC").count %>
-<% num.each do |k,v| %>
-  <%= k %>원 수량<%= v %>개 
-  <% kum_coin = sum_coin - v
-    if kum_coin >= 0 && sum_coin > 0 %>
-      낙찰 예정 
-  <%elsif kum_coin < 0 && sum_coin > 0 %>
-      선착순 부분 낙찰 예정
-  <%else%>
-      대기
-  <%end%>    
-  <%sum_coin = kum_coin %>
-<%end%>
-
-<% if @post.user_id == current_user.id %>
-<!-- 자신의 글에는 입찰할 수 없게 -->
-<% else %>
-  <%= form_for(@biding) do |f| %>
   
-    <div class="field">
-      시작가보다 높은 가격을 입찰해 주세요
-      <%= f.text_field :price %>
-    </div>
-    <div class="field">
-      몇개의 코인을 구매하시겠습니까?
-      <%= f.text_field :coin_count %>
-    </div>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :post_id, value: @post.id %>
-  
-    <div class="actions">
-      <%= f.submit "입찰하기" %>
-    </div>
-  <% end %>
-<% end %>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

@@ -1,6 +1,6 @@
 class CoinsController < ApplicationController
   before_action :set_coin, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter :verify_authenticity_token  
   # GET /coins
   # GET /coins.json
   def index
@@ -49,6 +49,42 @@ class CoinsController < ApplicationController
         format.json { render json: @coin.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def buy_coin
+    # 거래가 가능한지.
+    if params[:total_coin_num].to_i < params[:count].to_i
+      
+    else
+      # 잔고동기화
+      seller = User.find(params[:ori_user_id])
+      buyer = User.find(params[:new_user_id])
+      seller.budget += params[:count].to_i * params[:price].to_i
+      seller.save
+      buyer.budget -= params[:count].to_i * params[:price].to_i
+      buyer.save
+      
+      # 구매수량만큼 코인테이블에서 코인에 대한 소유자 바꿔주기
+      @bidded_post = Coin.where(:post_id => params[:post_id], :user_id => params[:ori_user_id])
+      count = 0
+      for i in @bidded_post
+        if(count < params[:count].to_i)
+          i.user_id = params[:new_user_id]
+          i.save
+          count +=1
+        else
+          break
+        end
+      end
+    
+      # 마켓테이블에서 올린 전체coin갯수에서 팔린 코인 수 빼기.
+      market_coin_count = Market.find(params[:id].to_i)
+      market_coin_count.count -= params[:count].to_i
+      market_coin_count.save
+      
+      redirect_to :back
+    end
+    
   end
 
   # DELETE /coins/1

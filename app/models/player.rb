@@ -5,7 +5,7 @@ class Player < ApplicationRecord
     mount_uploader :image4, PlayerImgUploaderUploader
     belongs_to :user
     has_many :posts, dependent: :destroy
-    has_many :comments
+    has_many :comments, dependent: :destroy
     
     paginates_per 4
 end

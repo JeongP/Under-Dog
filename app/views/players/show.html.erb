@@ -12,7 +12,7 @@
       </div>
     </div>
     <ul class="player_lnb">
-      <li><a href="#player_detail_info">선수 정보</a></li>
+      <li><a href="#player_detail_info" class="active">선수 정보</a></li>
       <li><a href="#player_support">후원 정보</a></li>
       <li><a href="#player_news">선수 소식</a></li>
     </ul>
@@ -22,9 +22,9 @@
     <div class="detail_content">
       <div class="row">
         <div class="col-md-12">
-          <div class="wrapper present_support_info">
-            <p>다음 후원 시작가<span>12만 5천</span>원</p>
-            <p>20% 지분 중 1/5 사용 잔여 지분 16%</p>
+          <div class="present_support_info">
+            <p>다음 후원 시작가</br><span>12만 5천</span>원</p>
+            <p>20% 지분 중 <span>1/5</span>사용 잔여 지분<span>16%</span></p>
           </div>
         </div>
       </div>
@@ -83,19 +83,18 @@
             <h4>선수 포지션</h4>
             <div class="row position_wrapper">
               <ul class="position_list col-md-6">
-                <li>LWF</li>
-                <li>SS</li>
-                <li class="active">CF</li>
-                <li>RWF</li></br>
-                <li>LWF</li>
-                <li>DMF</li>
-                <li>CMF</li>
-                <li>AMF</li>
-                <li>RMF</li></br>
-                <li>LB</li>
-                <li>CB</li>
-                <li>RB</li></br>
-                <li>GK</li>
+                <% pos_arr = ['LWF','SS','CF','RWF','LWF','DMF','CMF','AMF','RMF','LB','CB','RB','GK'] %>
+                <% pos_arr.each_with_index do |pos,i|%>
+                  <% if pos == @player.position %>
+                    <li class='active'><%= pos %></li>
+                  <% else %>
+                    <li><%= pos %></li>
+                  <% end %>
+                  <% if i == 3 || i== 8 || i==11 %>
+                  <br>
+                  <%end%>
+                <%end%>
+                
               </ul>
               <div class="position_chart col-md-6">
                 <canvas id="myChart"></canvas>
@@ -108,8 +107,16 @@
   </section>
   <section id="player_support">
     <h3>후원 정보</h3>
-    <div class="detail_content">
-      <div class='row'>
+    <% if @posts.blank? %>
+      <div class="detail_content">
+        <div class="wrapper">
+          아직 후원 내역이 없습니다.
+        </div>
+      </div>
+    <% else %>
+      <div class="detail_content">
+      <div class="wrapper">
+        <div class='row'>
         <% @posts.each do |post| %>
           <div class="col-sm-12 col-md-6 col-xl-3">
             <a href = "/posts/<%= post.id %>">  
@@ -129,7 +136,11 @@
           </div>
         <% end %>
       </div>
+      </div>
     </div>
+    <% end %>
+    
+    
   </section>
   <section id="player_news">
     <h3>선수 소식</h3>
@@ -141,94 +152,102 @@
             <div class="rwd-video is-16x9">
               <iframe width="560" height="315" src="<%= @player.video%>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-            <div class="cheer_comment">
+            <div class="player_article">
               <ul>
-                <% @player.comments.all.each do|comment|%>
-                  <li>
-                  <% user = User.find(:id => comment.email) %>
-                  <%=user.img%>
-                  <%=comment.name%>
-                  <%=comment.content%>
-                  </li>
-                  <br>
-                  <%=link_to '댓글삭제', comment_path(comment), method: :delete, date: { confirm: 'Are you sure?'} %>
-                  <br>
-                <%end%>
+                <li>
+                  <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+                    <div class="news_img_wrapper">
+                      <%= image_tag("news_img.png") %>
+                    </div>
+                    <div class="news_content">
+                      <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+                    <div class="news_img_wrapper">
+                      <%= image_tag("news_img.png") %>
+                    </div>
+                    <div class="news_content">
+                      <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+                    <div class="news_img_wrapper">
+                      <%= image_tag("news_img.png") %>
+                    </div>
+                    <div class="news_content">
+                      <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+                    <div class="news_img_wrapper">
+                      <%= image_tag("news_img.png") %>
+                    </div>
+                    <div class="news_content">
+                      <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
+                    <div class="news_img_wrapper">
+                      <%= image_tag("news_img.png") %>
+                    </div>
+                    <div class="news_content">
+                      <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+                    </div>
+                  </a>
+                </li>
               </ul>
-              <%= form_for Comment.new, url:comments_path do |f| %>
-                <p>
-                  <span>작성자</span>
-                  <%= f.text_field :name %>
-                </p>
-                <p>
-                  <span>내용</span>
-                  <%= f.text_field :content %>
-                </p>
-                
-                <%= f.hidden_field :player_id, value: @player.id %>
-                <%= f.hidden_field :email, value: current_user.id %>
-                
-                <%= f.submit '댓글 쓰기' %>
-              <%end%>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="wrapper player_article">
-        <h4>뉴스, 인터뷰</h4>
-        <ul>
-          <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
-              <div class="news_img_wrapper">
-                <%= image_tag("news_img.png") %>
+          <div class="wrapper cheer_comment">
+            <h4>응원 한마디</h4>
+            <ul id="comments">
+              <% @player.comments.all.each do|comment|%>
+                <% user = User.find(comment.email.to_i) %>
+                <li>
+                  <div class="comment_user_img">
+                    <% if user.img.blank? %>
+                      <%= image_tag("underdog1.png") %>
+                    <% else %>
+                      <%= image_tag(user.img) %>
+                    <% end %>
+                  </div>
+                  <div class="comment_text">
+                    <%= user.user_name%></br>
+                    <%= comment.content%>
+                  </div>
+                  
+                    <%#=link_to '댓글삭제', comment_path(comment), method: :delete, date: { confirm: 'Are you sure?'} %>
+                </li>
+              <%end%>
+            </ul>
+            <% c_usr = User.find(current_user.id) %>
+            
+            <%= form_tag('/players/newc', method: 'post',remote: true, authenticity_token: true) do %>
+              <div class="comment_user_img">
+                <%= image_tag(c_usr.img) %>
               </div>
-              <div class="news_content">
-                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
+              <div class="comment_input">
+                <%= text_field_tag :content, nil, placeholder: "선수를 응원해보세요!" %>
               </div>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
-              <div class="news_img_wrapper">
-                <%= image_tag("news_img.png") %>
+              
+              <%= hidden_field_tag :player_id, @player.id %>
+              <%= hidden_field_tag :email, current_user.id %>
+              <div class="comment_btn">
+                <%= submit_tag('등록')%>
               </div>
-              <div class="news_content">
-                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
-              <div class="news_img_wrapper">
-                <%= image_tag("news_img.png") %>
-              </div>
-              <div class="news_content">
-                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
-              <div class="news_img_wrapper">
-                <%= image_tag("news_img.png") %>
-              </div>
-              <div class="news_content">
-                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="http://www.goal.com/kr/%EB%89%B4%EC%8A%A4/%EB%A9%94%EC%8B%9C-%EC%95%84%EC%A7%81-%EB%8C%80%ED%91%9C%ED%8C%80-%EC%9D%80%ED%87%B4-%EC%97%AC%EB%B6%80-%EA%B2%B0%EC%A0%95-%EC%95%88-%ED%96%88%EB%8B%A4/1opv7kl7rrzok1isxh9ym981ck" target="_black">
-              <div class="news_img_wrapper">
-                <%= image_tag("news_img.png") %>
-              </div>
-              <div class="news_content">
-                <h5>메시, 아직 대표팀 은퇴 여부 결정 안 했다</h5>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
+            <%end%>
+          </div>
         </div>
       </div>
     </div>
@@ -245,10 +264,16 @@
   var myRadarChart = new Chart(ctx, {
     type: 'radar',
     data: {
-        labels: ['PAS', 'SHT', 'PYH', 'DEF', 'SPD', 'DRI'],
+        labels: ['패스', '슈팅', '피지컬', '방어력', '스피드', '드리블'],
         datasets: [{
-            backgroundColor: '#4a4a4a',
-            data: [20, 70, 40, 20, 80, 10]
+          label: "<%= @player.name %> 능력치",
+          backgroundColor: 'rgba(255,81,47,0.5)',
+          data: [50, 70, 40, 20, 80, 50]
+        },
+        {
+          label: "선수 평균 능력치",
+          backgroundColor: 'rgba(255,255,255,0.7)',
+          data: [10, 50, 40, 90, 30, 30]
         }]
     },
     options: {
@@ -258,8 +283,18 @@
             gridLines: {
               color: '#fff',
               lineWidth: 0.5
-            }
+            },
+            ticks: {
+      beginAtZero: true,
+      min: 0,
+      max: 100,
+      stepSize: 20
+    },
         }
     }
-});
+  });
+  
+  function jp_active() {
+    
+  }
 </script>

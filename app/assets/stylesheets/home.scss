@@ -344,18 +344,12 @@ input:-webkit-autofill {
 
 //이제부터 로그인쪽
 
-.container-fluid{
-  margin-top: 10vh;
-}
 
-.main_overview>section{
-  height: 60vh;
-}
 
 .main_overview{
   background: linear-gradient(#111, #222);
   .my_player_section{
-    
+    height: 60vh;
     display: flex;
     flex-direction: column;
     .over_view_title{
@@ -432,21 +426,163 @@ input:-webkit-autofill {
     }
   }
   .my_coin_section{
-    color: white;
-    font-size: 10rem;
+    display: flex;
+    width: 66%;
+    margin: 0 auto;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+    
+    .coin_info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex: 1 1 10vw;
+      text-align: center;
+      
+      .coin_comment{
+        color: white;
+        font-size: 2rem;
+        flex: 1 1 0;
+        margin: 0;
+      }
+      .coin_amount{
+        color: #ff512f;
+        font-size: 6rem;
+        flex: 1 1 0;
+        margin: 0;
+      }
+    }
+    .go_charge{
+      text-align: center;
+      font-size: 1.8rem;
+      
+      flex: 1 1 0;
+      border: 1px solid white;
+      padding: 2rem;
+      color: white;
+    }  
   }
   .new_player_overview_section{
-    
+    height: 100vh;
+    .over_view_title{
+      font-family: 'Nanum Gothic', sans-serif;
+      flex: 1 1 0;
+      p{
+        color: #ff512f;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+    }
+    .new_players{
+      
+    width: 66%;
+    height: 28vh;
+    margin: 0 auto;
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    
     .new_player_box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      
+      flex: 0 0 49%;
+      border: 1px solid gray;
+      height: 100%;
+      width: 100%;
+      margin-top: 1%;
+      -webkit-filter: brightness(.9) grayscale(70%);
+      filter: brightness(0.9) grayscale(70%);
+      
+      &:hover{
+        
+        -webkit-filter: brightness(1) grayscale(0%);
+        filter: brightness(1) grayscale(0%);
+        border: 1px solid #ff512f;
+        transition: 0.4s;
+          }
       .overlap{
-        flex: 0 0 50%;
+        opacity: 0;
+        text-align: center;
         width: 100%;
-        .new_player_img{
-          width: 100%;
+        height: 100%;
+        color: white;
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p{
+          font-size: 1.7rem;
+        }
+        &:hover{
+          background-color: rgba(0,0,0,0.8);
+          opacity: 1;
+          transition: .2s;
         }
       }
     }
+    .box1{
+      background: url("../else1.jpg");
+      background-size: cover;
+    }
+    .box2{
+      background: url("../else2.jpg");
+      background-size: cover;
+    }
+    .box3{
+      background: url("../else3.jpg");
+      background-size: cover;
+    }
+    .box4{
+      background: url("../else4.jpg");
+      background-size: cover;
+    }
+    .box5{
+      background: url("../else1.jpg");
+      background-size: cover;
+    }
+    .box6{
+      background: url("../else2.jpg");
+      background-size: cover;
+    }
+    }
+  }
+  .news_section{
+    min-height: 70vh;
+    height: 100%;
+    display: flex;
+    width: 66%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    th,td{
+      font-size: 1.2rem;
+      padding: 1.5rem;
+    }
+    .football_hot{
+      flex: 0 1 48%;
+    }
+    .underdog_hot{
+      flex: 0 1 48%;
+    }
+    .over_view_title{
+        font-family: 'Nanum Gothic', sans-serif;
+      flex: 1 1 0;
+      p{
+        color: #ff512f;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        font-size: 1.8rem;
+        text-align: center;
+      }
+      }
   }
 }

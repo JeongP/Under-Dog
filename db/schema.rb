@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180823124620) do
+ActiveRecord::Schema.define(version: 20180826090524) do
 
   create_table "bidings", force: :cascade do |t|
     t.integer  "price"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20180823124620) do
     t.string   "name"
     t.integer  "count"
     t.string   "rewards"
+    t.integer  "post_id"
+    t.string   "title"
   end
 
   create_table "players", force: :cascade do |t|
@@ -61,6 +63,25 @@ ActiveRecord::Schema.define(version: 20180823124620) do
     t.string   "image4"
     t.string   "video"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "position"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.boolean  "LWF"
+    t.boolean  "SS"
+    t.boolean  "CF"
+    t.boolean  "RWF"
+    t.boolean  "DMF"
+    t.boolean  "CMF"
+    t.boolean  "AMF"
+    t.boolean  "RMF"
+    t.boolean  "LB"
+    t.boolean  "CB"
+    t.boolean  "RB"
+    t.boolean  "GK"
+    t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

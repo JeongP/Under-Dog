@@ -1,0 +1,19 @@
+              <% player.comments.all.each do|comment|%>
+                <% user = User.find(comment.email.to_i) %>
+                <li>
+                  <div class="comment_user_img">
+                    <% if user.img.blank? %>
+                      <%= image_tag("underdog1.png") %>
+                    <% else %>
+                      <%= image_tag(user.img) %>
+                    <% end %>
+                  </div>
+                  <div class="comment_text">
+                    <%= user.user_name%></br>
+                    <%= comment.content%>
+                  </div>
+                  
+                    <%#=link_to '댓글삭제', comment_path(comment), method: :delete, date: { confirm: 'Are you sure?'} %>
+                  
+                </li>
+              <%end%>

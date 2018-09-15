@@ -28,6 +28,7 @@ class PlayersController < ApplicationController
   def create
     
     @player = Player.new(player_params)
+    # 선수 등록한 사람은 한 번만 가능하게
     @user = User.find(current_user.id) 
     @user.register = true
     @user.save
@@ -40,7 +41,6 @@ class PlayersController < ApplicationController
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
     end
-    2
   end
 
   # PATCH/PUT /players/1
@@ -69,7 +69,20 @@ class PlayersController < ApplicationController
       format.json { head :no_content }
     end
   end
+    def newc
+      @player = Player.find(params[:player_id])
+      @comment = Comment.new
+      @comment.content = params[:content]
+      @comment.player_id = params[:player_id]
+      @comment.email = params[:email]
 
+      
+      @comment.save
+      @comments=Comment.all
+      respond_to do |format|
+          format.js
+      end 
+    end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
@@ -78,6 +91,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:name, :height, :weight, :team, :image1, :image2, :image3, :image4, :video, :user_id)
+      params.require(:player).permit(:name, :height, :weight, :team, :image1, :image2, :image3, :image4, :video, :user_id, :position)
     end
 end

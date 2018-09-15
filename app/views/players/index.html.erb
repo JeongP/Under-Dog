@@ -1,9 +1,30 @@
-<div class="container">
-  <p id="notice" style='padding-top: 10rem'><%= notice %></p>
-  <!--이름/ 키 / 몸무게 / 소속팀 / 이미지 1~4 / 동영상-->
-  <h1>등록된 선수목록을 보여줍니다.</h1>
+<div class="container-fluid post_main_2">
+  <div class="row post_sub">
+    <section class="banner_section">
+      <div class="wrapper">
+        <div class="slogan">유망주의 후원금을 거래해보세요.</div>
+        <div class="wrap">
+           <div class="search">
+              <input type="text" class="searchTerm" placeholder="Who are you looking for?">
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+             </button>
+           </div>
+        </div>
+      </div>
+    </section>
+  </div>
   
-  <div class='row'>
+  <div class="row">
+    <section class="funding_section">
+      <% if current_user.register == true %>
+  <a  href="/players/new" onclick="alert('선수등록은 한 번만 할 수 있다!'); return false;">선수등록</a>
+<%else%>
+  <a  href="/players/new">선수 판매 등록하기</a>
+<%end%>
+    </section>
+  </div>
+  <div class="row ddd">
     <% @players.each do |player| %>
       <div class="col-sm-12 col-md-6 col-xl-3">
         <a href = "/players/<%= player.id %>">  
@@ -16,18 +37,38 @@
               <% end %>
             </div>
             <div class="card-body">
-              <h5 class="h-card-title" style="color:#09083a;"><%= player.name %></h5>
+              <h5 class="h-card-title"><%= player.name %></h5>
             </div>
           </div>
         </a>
       </div>
     <% end %>
+    <div class="papa">
+    <%= paginate @players %>
+    </div>
   </div>
-<%= paginate @players %>
 </div>
-<% if current_user.register == true %>
-  <a  href="/players/new" onclick="alert('선수등록은 한 번만 할 수 있다!'); return false;">선수등록</a>
-<%else%>
-  <a  href="/players/new">선수등록</a>
-<%end%>
 
+
+
+
+<style>
+
+  .card{
+    background-color: rgba(0,0,0,0.3);
+  }
+  .card-body{
+    background: transparent;
+    color: white;
+    font-size: 1.6rem;
+    padding-top: 2rem;
+  }
+  .card-body h5{
+    text-align: center;
+    color: white;
+  }
+  .ddd{
+    width: 76%;
+    margin: 0 auto;
+  }
+</style>

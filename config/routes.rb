@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resources :bidings
   resources :players
   resources :posts
-  
+  resources :positions, only: [:create, :destroy]
+
   root 'home#index'
-  
+  post 'players/newc' => 'players#newc'
 
  devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -23,7 +24,8 @@ Rails.application.routes.draw do
   get 'home/view_tx' => 'home/view_tx'
   get 'home/view_all_wallet' => 'home#view_all_wallet'
   post 'home/spon_end' => 'home#spon_end'
-
+  post 'coins/buy_coin' => 'coins#buy_coin'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

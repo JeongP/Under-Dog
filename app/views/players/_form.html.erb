@@ -45,11 +45,14 @@
   <div class="field">
     <%= f.label :video %>
     <%= f.text_field :video %>
-    
   </div>
   
+  <div class="field">
+    <% arr = ['LWF','SS','CF','RWF','LWF','DMF','CMF','AMF','RMF','LB','CB','RB','GK'] %>
+    <%= f.label :position %>
+    <%= f.select :position, arr, {} %>
+  </div>
   
-
   <div class="actions">
     <%= f.submit %>
   </div>

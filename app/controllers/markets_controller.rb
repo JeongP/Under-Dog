@@ -5,6 +5,7 @@ class MarketsController < ApplicationController
   # GET /markets.json
   def index
     @markets = Market.all
+    @markets = Market.order("created_at DESC").page params[:page]
   end
 
   # GET /markets/1
@@ -70,6 +71,6 @@ class MarketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def market_params
-      params.require(:market).permit(:price, :user_id, :name, :count, :rewards)
+      params.require(:market).permit(:price, :user_id, :name, :count, :rewards, :post_id, :title)
     end
 end

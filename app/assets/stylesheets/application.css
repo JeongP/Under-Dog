@@ -26,6 +26,9 @@ body {
 
 /*header*/
 
+.container-fluid{
+  margin-top: 10vh;
+}
 .header {
     width: 100%;
     position: fixed;
@@ -186,8 +189,8 @@ i {
 
 .divider{
   margin: 2rem auto;
-  width: 60%;
+  width: 66%;
   height: 1px;
-  background: gray;
+  background: #444;
 }
 /*  style='padding-top:10rem'  */

@@ -2,6 +2,102 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.post_main_2{
+    min-height: 100vh;
+    height: 100%;
+    background: linear-gradient(#111, #222) !important;
+.post_sub{
+    
+    display: flex;
+    flex-direction: column;
+    .banner_section{
+        width: 100%;
+        height: 100%;
+        flex: 0 1 232px;
+        background: url("../funding.jpeg") no-repeat;
+        background-size: cover;
+        .slogan{
+            padding-top: 6rem;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+        }
+        .wrapper{
+            z-index: 300;
+            width: 100%;
+            height: 232px;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            .search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 1px solid white;
+  padding: 5px;
+  height: 36px;
+  outline: none;
+  color: black;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.searchTerm:focus{
+  color: white;
+}
+
+.searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 36px;
+  
+  background: rgba(255,255,255,0.1);
+  text-align: center;
+  color: #fff;
+  
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+        }
+    }
+    .funding_section{
+        
+    }
+}
+.funding_section{
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    a{
+    border: 1px solid #ff512f;
+    padding: 1rem;
+    font-size: 2rem;
+    color: #ff512f;
+    }
+    width: 100%;
+    text-align: center;
+}
+}
+
+
+
+
+
+
+
+
 .player_detail_page{
     section {
         height: 100vh;
@@ -9,6 +105,7 @@
         color: #fff;
         margin-left: 20%;
         position: relative;
+        font-size: 1.4rem;
         h3 {
             position: absolute;
             top: 9rem;
@@ -17,7 +114,7 @@
     }
     .detail_content {
         min-height: 75vh;
-        background: yellow;
+        // background: yellow;
         margin: 0 5rem;
         position: relative;
         top: 63%;
@@ -68,16 +165,18 @@
     }
     
     .player_lnb {
-        margin-top: 2rem;
+        margin-top: 5rem;
         font-size: 1.6rem;
         font-weight: lighter;
         li{
-            background: #4a4a4a;
             a{
                 transition: all 0.2s ease-in-out;
                 color: #fff;
                 display: block;
                 padding: 2rem 0;
+            }
+            .active{
+                border: 1px solid #ff512f;
             }
         }
     }
@@ -101,9 +200,32 @@
     #player_detail_info {
         font-size: 1.6rem;
         .present_support_info {
+            background: #262626;
+            border-radius: 2px;
+            position: relative;
             height: 20vh;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight:lighter;
+            width: 100%;
+            text-align: center;
+            p{
+                // height: 20vh;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                span{
+                    font-size: 3rem;
+                    color: #ff512f;
+                }
+            }
+            p:first-of-type{
+                width: 31.5%;
+                left:0;
+            }
+            p:last-of-type{
+                width: 68.5%;
+                right:0;
+            }
         }
         .detail_info {
             height: 55vh;
@@ -129,7 +251,9 @@
             margin-top: 2rem;
         }
     }
-    
+    #player_support {
+        color: #fff;
+    }
     .player_position {
         .position_wrapper {
             position: relative;
@@ -175,9 +299,9 @@
     }
     
     .player_article {
-        height: 75vh;
+        height: 20vh;
         ul {
-            height: 65vh;
+            height: 20vh;
             overflow: scroll;
         }
         a {
@@ -217,9 +341,100 @@
         overflow: hidden;
     }
     .cheer_comment {
-        position: relative;
-        top: 3rem;
-        height: 25vh;
+        height: 75vh;
+        ul{
+            height: 60vh;
+            overflow: scroll;
+            li{
+                color: #fff;
+                background: #1a1a1a;
+                margin-top: 1rem;
+                padding: 1rem;
+                border-radius: 2px;
+                font-size: 1.4rem;
+            }
+        }
+        .comment_user_img {
+            width: 15%;
+            border-radius: 50%;
+            overflow: hidden;
+            float: left;
+            img{
+                width: 100%;
+            }
+        }
+        .comment_text {
+            margin-left: 60px;
+        }
+        form {
+            position: fixed;
+            bottom: 2rem;
+            z-index: 1000;
+            height: 6vh;
+            font-size: 1.2rem;
+            .comment_user_img {
+                float:left;
+            }
+            .comment_input {
+                float: left;
+                input{
+                    height: 6vh;
+                    border-radius: 30px;
+                    padding-left: 1rem;
+                    margin-left: 1rem;
+                    width: 100%;
+                    
+                }
+            }
+            .comment_btn {
+                position: absolute;
+                right: 2rem;
+                input {
+                    height: 6vh;
+                    border: none;
+                    border-radius: 2px;
+                    padding: 0 2rem;
+                    background: #ff512f;
+                    color: #fff;
+                }
+            }
+        }
+        
     }
     
 }
+.papa{
+    
+    margin: 3rem auto !important;
+}
+.align-self-center{
+    margin: 0 auto !important;
+    display: inline-block;
+    .pagination{
+        
+    }
+}
+  .page-link { 
+    
+    position: relative;
+    
+    display: block;
+    padding: .5rem .75rem;
+    
+    line-height: 1.25;
+    color: white !important;
+    background-color: black !important;
+    border: 1px solid #dee2e6;
+      a{
+
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: white !important;
+    background-color: black !important;
+    border: 1px solid #dee2e6;
+}
+      
+  }

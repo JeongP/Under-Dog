@@ -1,19 +1,69 @@
-
 <p id="notice" style='padding-top:10rem'><%= notice %></p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>가격:</strong>
   <%= @market.price %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>사용자:</strong>
   <%= @market.user_id %>
 </p>
-<% if @market.user_id == current_user.id %>
 
-<% else %>
-  
-<% end %>
+<p>
+  <strong>메일주소:</strong>
+  <%= @market.name %>
+</p>
+
+<p>
+  <strong>코인갯수:</strong>
+  <%= @market.count %>
+</p>
+
+<p>
+  <strong>어떤 포스트에 대한 건지:</strong>
+  <%= @market.post_id %>
+</p>
+
+
+<hr>
+
+<%# @coins = Coin.where(:user_id => @market.user_id) %>
+<%# coin = @coins.group(@market.user_id).count %>
+<%if current_user.id == @market.user_id %>
+<%else%>
+<form action='/coins/buy_coin' method='POST' onSubmit="jp_alert()">
+  <input type='hidden' name='total_coin_num' value='<%= @market.count %>'></input>
+  <input type='hidden' name='price' value='<%= @market.price %>'></input>
+  <input type='hidden' name='id' value='<%= @market.id %>'></input>
+  <input type='hidden' name='post_id' value='<%= @market.post_id %>'></input>
+  <input type='hidden' name='ori_user_id' value='<%= @market.user_id %>'></input>
+  <input type='hidden' name='new_user_id' value='<%= current_user.id %>'></input>
+  코인구매갯수: <input type='text' name='count' id="count"></input>
+  총 가격: 
+  <input type='submit' value='구매'></input>
+</form>
+<%end%>
+
+
+
 <%= link_to 'Edit', edit_market_path(@market) %> |
 <%= link_to 'Back', markets_path %>
+
+
+<script>
+  function jp_alert() {
+    var total_price = document.getElementById("count").value.to_i*<%= @market.price.to_i %>;
+    <% cur_usr = User.find(current_user.id) %>
+    if(<%= @market.count %> < document.getElementById("count").value ) {
+      alert("구매할 수 있는 코인이 부족합니다.");
+      return false;
+      // 아래 수정요함 (안먹힘)
+    }else if ( total_price > current_user.budget ) {
+      alert("구매할 수 있는 돈이 없습니다.");
+      return false;
+    }else {
+      return true;
+    }
+  }
+</script>
